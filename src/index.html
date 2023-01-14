@@ -1,12 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  
-</body>
-</html>
+
+<html lang="en-US">
+  <head>
+    <title>Currency Converter</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Select a country's currency to convert USD to.</h1>
+      <h2>Enter the country's 3 character currency code below.</h2>
+      <p>Common searches include:</p>
+      <li>
+        <ul>Canada: CAD</ul>
+        <ul>Mexico: MXN</ul>
+        <ul>China: CNY</ul>
+        <ul>Japan: JPY</ul>
+        <ul>Hong Kong: HKD</ul>
+      </li>
+      
+      <form>
+        <label for="amount-usd">Enter the amount you'd like converted:</label>
+        <input id="amount-usd" type="text" name="amount-usd">
+        <label for="country">Enter a Currency Code:</label>
+        <input id="counry" type="text" name="country">
+        
+        <button type="submit" class="btn" id="convert">Submit to convert currency:</button>
+      </form>
+      <p id="showCurrency"></p>
+    </div>
+  </body>
+  </html>
