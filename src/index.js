@@ -5,28 +5,28 @@ import CurrencyService from './service.js';
 
 //Business Logic
 
-function getRates(amount, country) {
-  const response = CurrencyService.getRates();
-  if (response.conversion_rates) {
-    convertCurrency(amount, country, response);
+async function getRates(amount, country) {
+  const response = await CurrencyService.getRates(country, amount);
+  if  (!(`${country}` in response.conversion_rates) || isNaN(amount) || amount === null) {
+    printError(response, country);
   } else {
-    printError(country, response);
+    convertCurrency(amount, country, response);
   }
 }
 
 function convertCurrency(amount, country, response) {
-  let exchangeRate= response.conversionRates[`${country}`];
-  let convertedAmount = exchangeRate / amount;
-  printCurrency(convertedAmount, country);
+  let exchangeRate= response.conversion_rates[`${country}`];
+  let convertedAmount = amount * exchangeRate;
+  printCurrency(amount, convertedAmount, country);
 }
 //UI Logic
 
-function printCurrency(convertedAmount, country) {
-  document.querySelector('#showCurrency').innerText = `You will have ${convertedAmount} in ${country}'s currency`;
+function printCurrency(amount, convertedAmount, country) {
+  document.querySelector('#showCurrency').innerText = `${amount} USD is ${convertedAmount} ${country}`;
 }
 
-function printError(country, response) {
-  document.querySelector('#showCurrency').innerText = `There was an error processing the exchange rate for currency code ${country}: ${response}. Please try again`;
+function printError(response, country) {
+  document.querySelector('#showCurrency').innerText = `There was an error processing the exchange rate for currency code ${country}: ${response["error-type"]}. Please try again`;
 }
 
 function handleFormSubmission(event) {
