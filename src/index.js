@@ -30,23 +30,13 @@ function printError(response, country) {
   document.querySelector('#showCurrency').innerText = `There was an error processing the exchange rate for currency code ${country}: ${response["error-type"]}. Please try again`;
 }
 
-/*function createDropDown() {
-  let dropDown = document.getElementById('dropDown');
-  let codes = currencyCodes;
-  codes.forEach(function(code) {
-    const item = document.createElement("item");
-    item.value = code[0];
-    item.text = code[0];
-    dropDown.appendChild(item);
-  }); 
-}*/
-
 function handleFormSubmission(event) {
   event.preventDefault();
+  const selectedCode = document.getElementById("dropDown");
   const amount = document.querySelector('#amount-usd').value;
   document.querySelector('#amount-usd').value = null;
-  const country = document.querySelector('#country').value;
-  document.querySelector('#country').value = null;
+  const country = selectedCode.value;
+  document.getElementById('dropDown').value = "AED";
   getRates(amount, country);
 }
 
@@ -60,9 +50,8 @@ document.addEventListener('DOMContentLoaded', function() {
   console.log(codes);
   codes.forEach(function(code) {
     const option = document.createElement("option");
-    option.value = code;
-    option.text = code;
+    option.value = code[0];
+    option.text = code[0];
     dropDown.appendChild(option);
   }); 
-  
 });
