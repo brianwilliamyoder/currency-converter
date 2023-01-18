@@ -8,7 +8,7 @@ import CurrencyService from './service.js';
 
 async function getRates(amount, country) {
   const response = await CurrencyService.getRates();
-  if  (!(`${country}` in response.conversion_rates) || isNaN(amount) || amount === null) {
+  if  (isNaN(amount) || amount === "" || !(`${country}` in response.conversion_rates) ) {
     printError(response, country, amount);
   } else {
     convertCurrency(amount, country, response);
@@ -26,10 +26,13 @@ function printCurrency(amount, convertedAmount, country) {
   document.querySelector('#showCurrency').innerText = `${amount} USD is ${convertedAmount} ${country}`;
 }
 
-function printError(response, country) {
-  document.querySelector('#showCurrency').innerText = `There was an error processing the exchange rate for currency code ${country}: ${response["error-type"]}. Please try again`;
+function printError(response, country, amount) {
+  if (isNaN(amount) || amount === "") {
+    document.querySelector('#showCurrency').innerText = 'There was an error processing the exchange rate for the amount entered. Please make sure that the amount field only includes numbers and is not empty.'; 
+  } else {
+    document.querySelector('#showCurrency').innerText = `There was an error processing the exchange rate for currency code ${country}: ${response["error-type"]}. Please try again`;
+  }
 }
-
 function handleFormSubmission(event) {
   event.preventDefault();
   const selectedCode = document.getElementById("dropDown");
