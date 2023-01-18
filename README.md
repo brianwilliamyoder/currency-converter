@@ -19,7 +19,7 @@
 * Open Terminal/Command line
 * Navigate to the desktop by typing **cd ~/Desktop** and press Enter on the keybord
 * type **git clone https://github.com/brianwilliamyoder/currency-calculator** into the terminal and press Enter on the keyboard
-* Navigate to the desktop and click on the "age-calculator" folder.
+* Navigate to the desktop and click on the "currency-exchange" folder.
 * Open the folder in VS Code
 * _The next steps will take place in the terminal_
 * Navigate to the age-calculator folder relative to your current directory
@@ -33,7 +33,7 @@
 
 ## Known Bugs
 
-* Error message does not print specifc error messages. 
+* None
 
 
 ## [License](https://mit-license.org/)
