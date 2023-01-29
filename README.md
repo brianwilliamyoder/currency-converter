@@ -16,18 +16,19 @@
 
 ## Setup/Installation Requirements
 
+
 * Open Terminal/Command line
 * Navigate to the desktop by typing **cd ~/Desktop** and press Enter on the keybord
 * type **git clone https://github.com/brianwilliamyoder/currency-calculator** into the terminal and press Enter on the keyboard
 * Navigate to the desktop and click on the "currency-exchange" folder.
 * Open the folder in VS Code
-* _The next steps will take place in the terminal_
-* Navigate to the age-calculator folder relative to your current directory
-* Enter "$ npm install"
-* Enter "$ npm run build"
-* Enter "$ npm run test" to view all testing data
+* Navigate to the currency-exchange folder relative to your current directory
+* Enter "$ npm install" in the terminal
+* Enter "$ npm run build" in the terminal
+* Go to https://www.exchangerate-api.com/ and sign up for an account to generate a personal API key
+* Create an .env file in the root level of the program directory
+* In the env file, input API_KEY=<your personal api key>
 * Enter "$ npm run start" to have it open in the browser
-
 * Enter the prompted information on the website, and click "Submit!" 
 * Enjoy the info!
 
