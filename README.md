@@ -27,7 +27,7 @@
 * Enter "$ npm run build" in the terminal
 * Go to https://www.exchangerate-api.com/ and sign up for an account to generate a personal API key
 * Create an .env file in the root level of the program directory
-* In the env file, input API_KEY=<your personal api key>
+* In the env file, input API_KEY=your personal API key 
 * Enter "$ npm run start" to have it open in the browser
 * Enter the prompted information on the website, and click "Submit!" 
 * Enjoy the info!
