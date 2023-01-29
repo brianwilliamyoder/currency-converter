@@ -1,53 +1,47 @@
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
-import { currencyCodes } from './currency-codes.js';
 import CurrencyService from './service.js';
+import { currencyCodes } from './currency-codes.js';
 
 //Business Logic
 
-async function getRates(amount, country) {
-  const response = await CurrencyService.getRates();
-  if  (isNaN(amount) || amount === "" || !(`${country}` in response.conversion_rates) ) {
-    printError(response, country, amount);
+async function getRates(country, amount) {
+  const response = await CurrencyService.getRates(country, amount);
+  if  (isNaN(amount) || amount === "" || !(`${country}` === response.target_code) ) {
+    printError(country, response, amount);
   } else {
-    convertCurrency(amount, country, response);
+    printCurrency(country, amount, response);
   }
 }
 
-function convertCurrency(amount, country, response) {
-  let exchangeRate= response.conversion_rates[`${country}`];
-  let convertedAmount = amount * exchangeRate;
-  printCurrency(amount, convertedAmount, country);
-}
 //UI Logic
 
-function printCurrency(amount, convertedAmount, country) {
-  document.querySelector('#showCurrency').innerText = `${amount} USD is ${convertedAmount} ${country}`;
+function printCurrency(country, amount, response) {
+  document.querySelector('#showCurrency').innerText = `${amount} USD is ${response.conversion_result} in ${country}`;
 }
 
-function printError(response, country, amount) {
-  if (isNaN(amount) || amount === "") {
-    document.querySelector('#showCurrency').innerText = 'There was an error processing the exchange rate for the amount entered. Please make sure that the amount field only includes numbers and is not empty.'; 
-  } else {
-    document.querySelector('#showCurrency').innerText = `There was an error processing the exchange rate for currency code ${country}: ${response["error-type"]}. Please try again`;
+function printError(country, response, amount) {
+  {
+    if (isNaN(amount)) {
+      document.querySelector('#showCurrency').innerText = `There was an error processing the exchange rate for amount ${amount}: ${response}. Please try again.`;
+    }
+    else {
+      document.querySelector('#showCurrency').innerText = `There was an error processing the exchange rate for country code ${country}: ${response}. Please try again.`;
+    }
   }
-}
+} 
+
 function handleFormSubmission(event) {
   event.preventDefault();
-  const selectedCode = document.getElementById("dropDown");
+  const country = document.getElementById("dropDown").value;
   const amount = document.querySelector('#amount-usd').value;
   document.querySelector('#amount-usd').value = null;
-  const country = selectedCode.value;
   document.getElementById('dropDown').value = "AED";
-  getRates(amount, country);
+  getRates(country, amount);
 }
 
-window.addEventListener("load", function() {
-  document.querySelector('form').addEventListener("submit", handleFormSubmission);
-});
-
-document.addEventListener('DOMContentLoaded', function() {
+function createDropDown() {
   let dropDown = document.getElementById('dropDown');
   let codes = currencyCodes;
   console.log(codes);
@@ -57,4 +51,12 @@ document.addEventListener('DOMContentLoaded', function() {
     option.text = code[0];
     dropDown.appendChild(option);
   }); 
+}
+
+window.addEventListener("load", function() {
+  document.querySelector('form').addEventListener("submit", handleFormSubmission);
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  createDropDown();
 });
