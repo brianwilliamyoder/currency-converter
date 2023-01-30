@@ -6,7 +6,7 @@
   <body>
     <div class="container">
       <h1>Convert USD to another country's currency.</h1>
-      <h2>Enter the country's 3 character currency code below.</h2>
+      <h2 class="h2">Select a country's 3 character currency code below.</h2>
       <p>Common searches include:</p>
       <ul>
         <li>Canada: CAD</li>
@@ -19,8 +19,8 @@
       <form>
         <label for="amount-usd">Enter the amount you'd like converted:</label>
         <input id="amount-usd" type="text" name="amount-usd">
-        <label for="country">Enter a Currency Code:</label>
-        <input id="country" type="text" name="country">
+        <label for="dropDown">Select a Currency Code:</label>
+        <select id="dropDown"></select>
         
         <button type="submit" class="btn-success" id="convert">Submit to convert currency:</button>
       </form>
